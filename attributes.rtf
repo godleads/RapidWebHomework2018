@@ -1,0 +1,647 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Msftedit 5.41.21.2509;}\viewkind4\uc1\pard\sa200\sl276\slmult1\lang9\f0\fs22 Writing Selectors\par
+At this point, you should be familiar with the basic structure of a CSS statement. Every CSS statement is made up of a selector and a declaration block. The selector tells the browser what HTML element we want to style and the declaration block tells the browser what styles need to be applied to that HTML.\par
+Image of css ruleset, with a div tag selector and declaration block with text-align: right\par
+The basic structure of a CSS statement\par
+For this exercise, I want you to focus exclusively on the selector part of a CSS statement. To do this, I've created a webpage that is lacking style. The webpage already has ids and classes added to the HTML, but it's missing the right selectors to add the style.\par
+\par
+<div id="menu">\par
+  <h1 class="item">Chicken Clay Pot</h1>\par
+  <img src="img/clay-pot.jpg" alt="clay pot" class="picture">\par
+  <p class="description">Crispy rice baked in clay pot topped with chicken and vegetables</p>\par
+</div>\par
+/* missing id */ \{\par
+  text-align: center;\par
+\}\par
+/* missing class */ \{\par
+  color: red;\par
+\}\par
+/* missing class */ \{\par
+  border-radius: 5px;\par
+\}\par
+/* missing class */ \{\par
+  font-style: italic;\par
+\}\par
+It's your job to download the webpage and fill-in the missing selectors. If you do it right, your webpage should end up looking like this...\par
+Screenshot of properly styled webpage. The title, Chicken Clay Pot, is colored red. The image of a pot with chicken and vegetables has a 5 pixel border radius, and the description - "Crispy rice baked in clay pot topped with chicken and vegetables" is italicized. The whole image is centered.\par
+Your corrected CSS should cause your site to render like this.\par
+How to Complete this Exercise\par
+Open the index.html file in your Workspace below.\par
+Edit index.html and add the missing id and class selectors within the <style> tags.\par
+When you've successfully added the correct selectors, your site should look like the picture. Click over to solution.html to see how I did it.\par
+\par
+CSS-Tricks\par
+Search for:\par
+flexbox\par
+\par
+Beginner Concepts: How CSS Selectors Work\par
+BY CHRIS COYIER ON AUGUST 9, 2014\par
+Are you new to CSS? This article is for you! Perhaps the biggest key to understanding CSS is understanding selectors. Selectors are what allows you to target specific HTML elements and apply style to them. Let's not think about style right now though, let's just focus on the selecting.\par
+\par
+\par
+In the examples below, the CSS would be in a file called something like style.css that is referenced from an HTML document called something like index.html. They are separate files, which is the great thing about CSS, keeping the design away from the document.\par
+\par
+Here's what that HTML file would be like:\par
+\par
+<!DOCTYPE html>\par
+<html lang="en">\par
+\par
+<head>\par
+  <title>We're learning selectors!</title>\par
+  <link rel="stylesheet" href="style.css">\par
+</head>\par
+\par
+<body>\par
+  \par
+  <h1 id="yay">Yay</h1>\par
+\par
+<body>\par
+</html>\par
+And the CSS file would contain just the selector blocks like you'll see below.\par
+\par
+#ID selector\par
+#happy-cake \{\par
+\par
+\}\par
+<!-- WILL match -->\par
+<div id="happy-cake"></div>\par
+\par
+<!-- WILL match -->\par
+<aside id="happy-cake"></aside>\par
+\par
+<!-- Will NOT match -->\par
+<div id="sad-cake">Wrong ID!</div>\par
+\par
+<!-- Will NOT match -->\par
+<div class="happy-cake">That's not an ID!</div>\par
+#Leveling Up\par
+ID selectors are the most powerful type of selector in terms of CSS specificity. Meaning that they beat out other types of selectors and the styles defined within win. That sounds good, but that's typically considered bad, because it's nice to have lower-specificity selectors that are easier to override when needed.\par
+\par
+#Class Selector\par
+.module \{\par
+\par
+\}\par
+<!-- WILL match -->\par
+<div class="module"></div>\par
+\par
+<!-- WILL match -->\par
+<aside class="country module iceland"></aside>\par
+\par
+<!-- Will NOT match -->\par
+<div class=".module">The dot is for CSS, not HTML</div>\par
+\par
+<!-- Will NOT match -->\par
+<div class="bigmodule">Wrong class</div>\par
+#Leveling Up\par
+Class selectors are your friend. They are probably the most useful and versatile selectors out there. In part because they are well supported in all browsers. In part because you can add multiple classes (just separated by a space) on HTML elements. In part because there are JavaScript things you can do specifically for manipulating classes.\par
+\par
+#Tag Selector\par
+h2 \{\par
+\par
+\}\par
+<!-- WILL match -->\par
+<h2>Hi, Mom</h2>\par
+\par
+<main>\par
+  <div>\par
+     <!-- WILL match -->\par
+     <h2>Anywhere</h2>\par
+  </div>\par
+</main>\par
+\par
+<!-- Will NOT match -->\par
+<div class="h2">Wrong tag, can't trick it</div>\par
+\par
+<!-- Will NOT match -->\par
+<h2class="yolo">Make sure that tag has a space after it!</h2>\par
+#Leveling Up\par
+Tag selectors are at their most useful when changing properties that are unique to that HTML element. Like setting the list-style on a <ul> or tab-size on a <pre>. Also in reset stylesheets where you are specifically trying to unset styles that browsers apply to certain elements.\par
+\par
+Don't rely on them too much though. It's typically more useful to have a class define styling that you can use on any HTML element.\par
+\par
+#Attribute Selector\par
+[data-modal="open"] \{\par
+\par
+\}\par
+<!-- WILL match -->\par
+<div data-modal="open"></div>\par
+\par
+<!-- WILL match -->\par
+<aside class='closed' data-modal='open'></aside>\par
+\par
+<!-- Will NOT match -->\par
+<div data-modal="false">Wrong value</div>\par
+\par
+<!-- Will NOT match -->\par
+<div data-modal>No value</div>\par
+\par
+<!-- Will NOT match -->\par
+<div data-modal-open>Wrong attribute</div>\par
+#Leveling Up\par
+You might argue that attribute selectors are even more useful than classes because they have the same specificity value, but can be any attribute not just class, plus they can have a value you can select by.\par
+\par
+Hardly an issue anymore, but attribute selectors aren't supported in IE 6.\par
+\par
+#Positional Selectors\par
+:nth-child(2) \{\par
+\par
+\}\par
+<ul>\par
+  <li>nope</li>\par
+  <!-- WILL match -->\par
+  <li>yep, I'm #2</li>\par
+  <li>nope</li>\par
+</ul>\par
+#Leveling Up\par
+There are several different positional selectors beyond :nth-child. Using simple expressions (like 3n = "every third") you can select elements based on their position in the HTML. You can play with that idea here or check out some useful recipes.\par
+\par
+#Other Pseudo Selectors\par
+:empty \{\par
+\par
+\}\par
+<!-- WILL match -->\par
+<div></div>\par
+\par
+<!-- WILL match -->\par
+<aside data-blah><!-- nothin' --></aside>\par
+\par
+<!-- Will NOT match -->\par
+<div> </div>\par
+\par
+<!-- Will NOT match -->\par
+<div>\par
+</div>\par
+#Leveling Up\par
+:empty is one of many pseudo selectors, which you can recognize by the colon (:) in them. They typically represent something that you couldn't know by just the element and attributes alone.\par
+\par
+Note that these are slightly different than pseudo elements, which you can recognize by the double colon (::). They are responsible for adding things to the page by the things they select.\par
+\par
+#More Leveling Up\par
+Selectors can be combined together. For instance:\par
+\par
+.module.news \{  \par
+  /* Selects elements with BOTH of those classes */\par
+\}\par
+#site-footer::after \{\par
+  /* Adds content after an element with that ID */\par
+\}\par
+section[data-open] \{\par
+  /* Selects only section elements if they have this attribute */\par
+\}\par
+There are also selector combinators like ~ and + and > that affect selectors, like:\par
+\par
+.module > h2 \{\par
+  /* Select h2 elements that are direct children of an element with that class */\par
+\} \par
+h2 + p \{\par
+  /* Select p elements that are directly following an h2 element */\par
+\}\par
+li ~ li \{\par
+  /* Select li elements that are siblings (and following) another li element. */\par
+\}\par
+Here on CSS-Tricks there is an entire Almanac that covers all the selectors in CSS, as well as properties.\par
+\par
+#Related\par
+The Skinny on CSS Attribute Selectors\par
+CSS has the ability to target HTML elements based on any one of their attributes. You probably already know about classes and IDs. Check out this bit of HTML: David Walsh This single element has three attributes: ID, class, and rel. To select the element in CSS, you could use\'85\par
+Efficiently Rendering CSS\par
+I admittedly don't think about this idea very often... how efficient is the CSS that we write, in terms of how quickly the browser can render it? This is definitely something that browser vendors care about (the faster pages load the happier people are using their products). Mozilla has an\'85\par
+Meet the Pseudo Class Selectors\par
+Meet the Pseudo Class Selectors\par
+Pseudo class selectors are CSS selectors with a colon preceding them. You are probably very familiar with a few of them. Like hover: a:hover \{ /* Yep, hover is a pseudo class */ \} They are immensely useful in a variety of situations. Some of them are CSS3, some CSS2...\'85\par
+Comments\par
+User Avatar\par
+Phan An\par
+Permalink to comment# AUGUST 9, 2014\par
+For \ldblquote Attribute Selector\rdblquote , shouldn\rquote t the CSS read [data-modal="true"] instead?\par
+\par
+User Avatar\par
+Chris Coyier\par
+Permalink to comment# AUGUST 9, 2014\par
+There was a typo in there! Thanks for catching Phan. Gonna bury this since it\rquote s no longer relevant.\par
+\par
+User Avatar\par
+Phillip Gruneich\par
+Permalink to comment# AUGUST 9, 2014\par
+#site-footer::after \{\par
+  /* Adds content after an element with that ID */\par
+\}\par
+Double colon is not recognized on IE, right? Gotta use the single colon syntax.\par
+\par
+User Avatar\par
+Chris Coyier\par
+Permalink to comment# AUGUST 9, 2014\par
+That is true for IE 8 yep. I think it\rquote s nice presenting the concept with the different between selector and element with the different number of colons though. It\rquote s always choosy in a beginner article what to cover and what not to, lest overwhelm.\par
+\par
+User Avatar\par
+jimmy\par
+Permalink to comment# AUGUST 9, 2014\par
+Very well written Chris.\par
+\par
+You should note that IDs must only be used once per page,because a lot of begginers don\rquote t know that :)\par
+\par
+User Avatar\par
+jimmy\par
+Permalink to comment# AUGUST 9, 2014\par
+*same IDs\par
+\par
+User Avatar\par
+Chris Coyier\par
+Permalink to comment# AUGUST 10, 2014\par
+Weirdly enough, while that\rquote s absolutely a best practice, CSS doesn\rquote t really care about that.\par
+\par
+User Avatar\par
+few\par
+Permalink to comment# AUGUST 10, 2014\par
+why should it? having a unique id is a restriction for html documents not css.\par
+\par
+User Avatar\par
+jimmy\par
+Permalink to comment# AUGUST 11, 2014\par
+That is what I meant. I know CSS doesn\rquote t care and that is all OK.\par
+The name of the ID should be unique in a HTML document.\par
+\par
+And this can potentially be confusing for beginners.\par
+\par
+Validator will throw an error if you have this in same page. But it is not a big deal :)\par
+\par
+User Avatar\par
+jimmy\par
+Permalink to comment# AUGUST 11, 2014\par
+That is what I meant. I know CSS doesn\rquote t care and that is all OK.\par
+The name of the ID should be unique in a HTML document.\par
+\par
+And this can potentially be confusing for beginners.\par
+\par
+<!-- WILL match -->\par
+\par
+\par
+<!-- WILL match -->\par
+\par
+Validator will throw an error if you have this in same page. But it is not a big deal :)\par
+\par
+User Avatar\par
+jimmy\par
+Permalink to comment# AUGUST 11, 2014\par
+fuck ,sorry about this Chris.\par
+\par
+I meant on ID happy-cake\par
+\par
+User Avatar\par
+Ricozor\par
+Permalink to comment# AUGUST 18, 2014\par
+CSS don\rquote t care multiple same IDs but javascript care ( javascript will focus the last one in the flow )\par
+that\rquote s why multiple same IDs are forbiden.\par
+\par
+User Avatar\par
+Travis Miller\par
+Permalink to comment# AUGUST 9, 2014\par
+That :empty selector tho\'85 #mindblown\par
+\par
+User Avatar\par
+Max Bailey\par
+Permalink to comment# AUGUST 10, 2014\par
+I was thinking the same thing. I\rquote m pretty good with pseudo selectors/elements, but I didn\rquote t even know about that one!\par
+\par
+User Avatar\par
+Rene\par
+Permalink to comment# AUGUST 12, 2014\par
+:empty is great but be aware that white space can/should be rendered as a text node in the dom. As soon as there is a textnode in an element, :empty will be false on that element.\par
+This behaviour does differ between browsers last time I checked(maybe also depending on type of element).\par
+\par
+I wouldn\rquote t like to rely on this selector, it\rquote s too invisible when working on the html and an extra newline is easily added.\par
+\par
+In the almanac as well: {\field{\*\fldinst{HYPERLINK "http://css-tricks.com/almanac/selectors/e/empty/"}}{\fldrslt{\ul\cf1 http://css-tricks.com/almanac/selectors/e/empty/}}}\f0\fs22\par
+\par
+User Avatar\par
+Michael Whyte\par
+Permalink to comment# AUGUST 9, 2014\par
+Thanks Chris for creating a post geared at the beginner CSS developer\'85I teach CSS and a lot of concepts in CSS that some blog writers take for granted are completely foreign to newbies just starting out in CSS\'85Post like these really help\'85\par
+\par
+Thanks for sharing your knowledge\'85\par
+\par
+User Avatar\par
+Eric Santana\par
+Permalink to comment# AUGUST 9, 2014\par
+While I am not a CSS beginner myself, this is a solid overview on working with selectors. Good link to pass on to a few folks I know in the process of learning this stuff. Thanks as always, Chris!\par
+\par
+User Avatar\par
+Akhtar @WebDesignBoom\par
+Permalink to comment# AUGUST 11, 2014\par
+Me too share with my new students\'85 Thanks Chris\par
+\par
+User Avatar\par
+me\par
+Permalink to comment# AUGUST 9, 2014\par
+short. simple :)\par
+\par
+User Avatar\par
+andredupond\par
+Permalink to comment# AUGUST 9, 2014\par
+this is a nice \ldblquote game\rdblquote  to practice : {\field{\*\fldinst{HYPERLINK "http://flukeout.github.io/"}}{\fldrslt{\ul\cf1 http://flukeout.github.io/}}}\f0\fs22  !\par
+you have to select the woobling item. To begin the 3 first answers to type in the blinking blue field are :\par
+plate\par
+bento\par
+plate#fancy\par
+\par
+enjoy beginners !\par
+\par
+User Avatar\par
+Ronald Roe\par
+Permalink to comment# AUGUST 9, 2014\par
+This is a perfect representation of my big \ldblquote AHA\rdblquote  moment with CSS. Odd as it may seem, realizing that \ldblquote selector\rdblquote  actually meant that you are \ldblquote selecting\rdblquote  something was a huge step for me in understanding how CSS worked.\par
+\par
+User Avatar\par
+few\par
+Permalink to comment# AUGUST 10, 2014\par
+Duh, How else would it work?\par
+\par
+User Avatar\par
+Jocely\par
+Permalink to comment# AUGUST 10, 2014\par
+Thanks for the article. I had no clue about those last three selectors.\par
+\par
+User Avatar\par
+Priya\par
+Permalink to comment# AUGUST 11, 2014\par
+Thanks Chris. This is great article.\par
+\par
+User Avatar\par
+Arif\par
+Permalink to comment# AUGUST 11, 2014\par
+Thanks Chris. What a Useful article.\par
+\par
+User Avatar\par
+Hemanthmalli\par
+Permalink to comment# AUGUST 11, 2014\par
+Very useful information for the persons who are learning CSS.\par
+\par
+User Avatar\par
+Darragh McCurragh\par
+Permalink to comment# AUGUST 13, 2014\par
+Thank you for putting it all in one place. Several tutorials I had a look at were rather convoluted and I have visited CSS tricks a few times now to get my head cleared up again, in fact it nicely showed up in Google once I knew how to pose the question or I would not have found you back in May or June.\par
+\par
+User Avatar\par
+Jason\par
+Permalink to comment# AUGUST 13, 2014\par
+Honestly I have always been hesitant to use those special selectors. Will they work in all browsers?\par
+\par
+User Avatar\par
+TerryLee\par
+Permalink to comment# AUGUST 14, 2014\par
+what\rquote s different with \ldblquote .class:after\rdblquote  and \ldblquote .class::after\rdblquote  ? one \ldblquote :\rdblquote  and two \ldblquote ::\rdblquote  ? why?\par
+\par
+User Avatar\par
+Adrian\par
+Permalink to comment# AUGUST 20, 2014\par
+TerryLee, the \ldblquote .class:after\rdblquote  is the old CSS2 syntax for pseudo selectors.\par
+The \ldblquote .class::after\rdblquote  is the new CSS3 syntax. And the reason it has two \ldblquote ::\rdblquote  is to clearly differentiate a pseudo-class from a pseudo-element.\par
+For example \ldblquote a:active\rdblquote  is a pseudo-class which targets the active state of an anchor.\par
+Imagine using \ldblquote a:after\rdblquote  for adding some content after an anchor. It will just be confusing for some people. And because of that, it\rquote s better to use \ldblquote a::after\rdblquote . Still, note that IE8 still uses the old CSS2 syntax with just one \ldblquote :\rdblquote .\par
+\par
+This comment thread is closed. If you have important information to share, please contact us.\par
+Get the Newsletter!\par
+Email Address\par
+SUBSCRIBE\par
+\par
+Lots of great stuff that isn't published anywhere else!\par
+Media Temple\par
+CSS-Tricks web host since day one. Save 20% with code CSSTRICKS.\par
+CSS-Tricks* is created, written by, and maintained by Chris Coyier and a team of swell people. It is built on WordPress, hosted by Media Temple, and the assets are served by MaxCDN. It is made possible through sponsorships from products and services we like.\par
+\par
+*May or may not contain any actual "CSS" or "Tricks".\par
+\par
+\par
+CONTACT\par
+ABOUT\par
+ARCHIVES\par
+ADVERTISE\par
+JOBS\par
+LICENSE\par
+SUBSCRIBE\par
+RANDOM\par
+GUEST POSTING\par
+Front-End Jobs\par
+\par
+Publishers Clearing House is hiring a Frontend Developer\par
+NEVERBLAND is hiring a Senior Creative Front End Developer\par
+FFunction is hiring a Front-end Developer (intermediate-senior)\par
+SEE MORE JOBS\par
+POST A JOB\par
+Skip to main content\par
+Select language\par
+Skip to search\par
+MDN Web Docs\par
+Technologies  References & Guides  Feedback \par
+Sign in\par
+Search\par
+Search\par
+ Search\par
+ Languages   Edit   Advanced\par
+Learn web development\par
+Attribute selectors\par
+ Previous  Overview: Introduction to CSS Next \par
+ \par
+\par
+Attribute selectors are a special kind of selector that will match elements based on their attributes and attribute values. Their generic syntax consists of square brackets ([]) containing an attribute name followed by an optional condition to match against the value of the attribute. Attribute selectors can be divided into two categories depending on the way they match attribute values: Presence and value attribute selectors and Substring value attribute selectors.\par
+\par
+Presence and value attribute selectors\par
+\par
+These attribute selectors try to match an exact attribute value:\par
+\par
+[attr] : This selector will select all elements with the attribute attr, whatever its value.\par
+[attr=val] : This selector will select all elements with the attribute attr, but only if its value is val.\par
+[attr~=val]: This selector will select all elements with the attribute attr, but only if the value val is one of a space-separated list of values contained in attr's value, for example a single class in a space-separated list of classes.\par
+Let's look at an example featuring the following HTML snippet:\par
+\par
+Ingredients for my recipe: <i lang="fr-FR">Poulet basquaise</i>\par
+<ul>\par
+  <li data-quantity="1kg" data-vegetable>Tomatoes</li>\par
+  <li data-quantity="3" data-vegetable>Onions</li>\par
+  <li data-quantity="3" data-vegetable>Garlic</li>\par
+  <li data-quantity="700g" data-vegetable="not spicy like chili">Red pepper</li>\par
+  <li data-quantity="2kg" data-meat>Chicken</li>\par
+  <li data-quantity="optional 150g" data-meat>Bacon bits</li>\par
+  <li data-quantity="optional 10ml" data-vegetable="liquid">Olive oil</li>\par
+  <li data-quantity="25cl" data-vegetable="liquid">White wine</li>\par
+</ul>\par
+And a simple style sheet:\par
+\par
+/* All elements with the attribute "data-vegetable"\par
+   are given green text */\par
+[data-vegetable] \{\par
+  color: green;\par
+\}\par
+\par
+/* All elements with the attribute "data-vegetable"\par
+   with the exact value "liquid" are given a golden\par
+   background color */\par
+[data-vegetable="liquid"] \{\par
+  background-color: goldenrod;\par
+\}\par
+\par
+/* All elements with the attribute "data-vegetable",\par
+   containing the value "spicy", even among others,\par
+   are given a red text color */\par
+[data-vegetable~="spicy"] \{\par
+  color: red;\par
+\}\par
+The result is as follows:\par
+\par
+\par
+Open in CodePen Open in JSFiddle\par
+\par
+Note: The data-* attributes seen in this example are called data attributes. They provide a way to store custom data in an HTML attribute so it can then be easily extracted and used. See How to use data attributes for more information.\par
+Substring value attribute selectors\par
+\par
+Attribute selectors in this class are also known as "RegExp-like selectors", because they offer flexible matching in a similar fashion to regular expression (but to be clear, these selectors are not true regular expression):\par
+\par
+[attr|=val] : This selector will select all elements with the attribute attr for which the value is exactly val or starts with val- (careful, the dash here isn't a mistake, this is to handle language codes.)\par
+[attr^=val] : This selector will select all elements with the attribute attr for which the value starts with val.\par
+[attr$=val] : This selector will select all elements with the attribute attr for which the value ends with val.\par
+[attr*=val] : This selector will select all elements with the attribute attr for which the value contains the string val (unlike [attr~=val], this selector doesn't treat spaces as value separators but as part of the attribute value.)\par
+Let's continue our previous example and add the following CSS rules:\par
+\par
+/* Classic usage for language selection */\par
+[lang|=fr] \{\par
+  font-weight: bold;\par
+\}\par
+\par
+/* All elements with the attribute "data-quantity", for which\par
+   the value starts with "optional" */\par
+[data-quantity^="optional"] \{\par
+  opacity: 0.5;\par
+\}\par
+\par
+/* All elements with the attribute "data-quantity", for which\par
+   the value ends with "kg" */\par
+[data-quantity$="kg"] \{\par
+  font-weight: bold;\par
+\}\par
+\par
+/* All elements with the attribute "data-vegetable" containing\par
+   the value "not spicy" are turned back to green */\par
+[data-vegetable*="not spicy"] \{\par
+  color: green;\par
+\}\par
+ \par
+\par
+With those new rules, we will get this:\par
+\par
+\par
+Open in CodePen Open in JSFiddle\par
+\par
+Active learning: Styling soccer results\par
+\par
+In this active learning, we'd like you to try your hand at adding attribute selectors to some rules to style a simple soccer results listing. There are three things to try to do here:\par
+\par
+The first three rules add a UK, German, and Spanish flag icon respectively to the left hand side of the list items. You need to fill in appropriate attribute selectors so that the teams are given their correct country flags, matched by language.\par
+Rules 4\endash 6 add a background color to the list items to indicate whether the team has gone up in the league (green, rgba(0,255,0,0.7)), down (red, rgba(255,0,0,0.5)), or stayed in the same place (blue, rgba(0,0,255,0.5).)  Fill in the appropriate attribute selectors to match the correct colors to the correct teams, matched by the inc, same and dec strings that appear in the data-perf attribute values.\par
+Rules 7\endash 8 make teams that are set to be promoted bold, and teams that are in danger of being relegated italic and gray. Fill in appropriate attribute selectors to match these styles to the correct teams, matched by the pro and rel strings that appear in the data-perf attribute values.\par
+If you make a mistake, you can always reset it using the Reset button. If you get really stuck, press the Show solution button to see a potential answer.\par
+\par
+\par
+Open in CodePen Open in JSFiddle\par
+\par
+See also\par
+\par
+See the Attribute selectors reference page for more useful examples.\par
+\par
+Coming up next\par
+\par
+Next we will move things up a gear, looking at Pseudo-classes and pseudo-elements.\par
+\par
+ Previous  Overview: Introduction to CSS Next \par
+ \par
+\par
+In this module\par
+\par
+How CSS works\par
+CSS syntax\par
+Selectors\par
+Simple selectors\par
+Attribute selectors\par
+Pseudo-classes and pseudo-elements\par
+Combinators and multiple selectors\par
+CSS values and units\par
+Cascade and inheritance\par
+The box model\par
+Debugging CSS\par
+Fundamental CSS comprehension\par
+ \par
+\par
+Document Tags and Contributors\par
+ Tags:  Article Attribute Attribute selectors Beginner CSS CSS Selectors Guide Learn presence Selectors substring value\par
+ Contributors to this page: chrisdavidmills, csarami, Sheppy, bripmccann, stephaniehobson, dsujeeun, lvnam96, mikki\par
+ Last updated by: chrisdavidmills, May 3, 2018, 1:39:53 AM\par
+Learn web development Learn to style HTML using CSS Introduction to CSS Attribute selectors\par
+Related Topics\par
+Complete beginners start here!\par
+Getting started with the Web\par
+HTML \emdash  Structuring the Web\par
+Introduction to HTML\par
+Multimedia and embedding\par
+HTML tables\par
+HTML forms\par
+CSS \emdash  Styling the Web\par
+Introduction to CSS\par
+Introduction to CSS overview\par
+How CSS works\par
+CSS syntax\par
+Selectors introduction\par
+Simple selectors\par
+Attribute selectors\par
+Pseudo-classes and pseudo-elements\par
+Combinators and multiple selectors\par
+CSS values and units\par
+Cascade and inheritance\par
+The box model\par
+Debugging CSS\par
+Assessment: Fundamental CSS comprehension\par
+Styling text\par
+Styling boxes\par
+CSS layout\par
+JavaScript \emdash  Dynamic client-side scripting\par
+JavaScript first steps\par
+JavaScript building blocks\par
+Introducing JavaScript objects\par
+Client-side web APIs\par
+Accessibility \emdash  Make the web usable by everyone\par
+Accessibility guides\par
+Accessibility assessment\par
+Tools and testing\par
+Cross browser testing\par
+Server-side website programming\par
+First steps\par
+Django web framework (Python)\par
+Express Web Framework (node.js/JavaScript)\par
+Further resources\par
+Advanced learning material\par
+Common questions\par
+How to contribute\par
+Learn the best of web development\par
+\par
+Get the latest and greatest from MDN delivered straight to your inbox.\par
+\par
+E-mail\par
+you@example.com\par
+ Sign up now\par
+Hide Newsletter Sign-up\par
+MDN Web Docs\par
+Web Technologies\par
+Learn Web Development\par
+About MDN\par
+Feedback\par
+ \par
+Mozilla\par
+About\par
+Contact Us\par
+Donate\par
+Firefox\par
+  \par
+Other languages:  \par
+Terms Privacy Cookies\par
+\'a9 2005-2018 Mozilla and individual contributors. Content is available under these licenses.\par
+}
+ 
